@@ -1,4 +1,4 @@
-<section id="skills" class="relative py-24 bg-gradient-to-br from-theme-light via-theme to-theme-section px-4 md:px-12 overflow-hidden">
+<section id="skills" class="relative py-24 bg-gradient-to-br from-theme-light via-theme to-theme-section px-4 md:px-12 overflow-hidden -mt-16 md:-mt-20">
   <!-- Effet de texture / lumière animée -->
   <div id="skills-texture" class="absolute inset-0 opacity-15" style="background: radial-gradient(circle at 20% 30%, rgba(255, 140, 97, 0.25), transparent 70%);"></div>
   
@@ -6,13 +6,13 @@
     <!-- Titre et description -->
     <div class="text-center mb-12">
       <h2 class="text-3xl md:text-4xl font-bold text-secondary mb-4">Mes compétences techniques</h2>
-      <p class="text-lg text-theme max-w-2xl mx-auto">Je conçois et optimise des sites WordPress performants, sécurisés et bien structurés.</p>
+      <p class="text-lg text-theme max-w-2xl mx-auto">Ce sont les outils et langages maîtrisés pour développer des solutions web fiables, performantes et sécurisées.</p>
     </div>
 
     <!-- Grid des compétences -->
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
       <!-- WordPress -->
-      <div class="skill-card bg-theme border border-theme p-6 rounded-xl shadow hover:shadow-lg transition-all duration-300">
+      <div class="skill-card bg-theme border border-theme p-6 rounded-xl shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:bg-gradient-to-br hover:from-theme-light hover:to-theme-section">
         <div class="flex justify-center mb-4">
           <svg class="w-10 h-10 text-accent" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M21.469 6.825c.84 1.537 1.318 3.3 1.318 5.175 0 3.979-2.156 7.456-5.363 9.325l3.295-9.027c.097-.268.153-.543.153-.832 0-1.208-.623-2.277-1.515-2.971.205-.484.326-1.01.326-1.56 0-1.385-.9-2.559-2.153-3.027.19-.292.3-.637.3-1.01 0-1.12-.91-2.03-2.03-2.03-.297 0-.578.065-.835.177C11.528.558 9.298 0 6.956 0 3.119 0 .031 2.085 0 4.807c0 .776.24 1.497.65 2.093-.42.31-.75.74-.93 1.23C-.27 8.8.03 9.5.557 9.95c-.31.42-.5.93-.5 1.48 0 .98.627 1.813 1.514 2.14-.2.98-.3 1.99-.3 3.01 0 4.079 2.157 7.456 5.363 9.325l-3.295-9.027c-.097-.268-.153-.543-.153-.832 0-1.208.623-2.277 1.515-2.971-.205-.484-.326-1.01-.326-1.56 0-1.385.9-2.559 2.153-3.027-.19-.292-.3-.637-.3-1.01 0-1.12.91-2.03 2.03-2.03.297 0 .578.065.835.177C12.472.558 14.702 0 17.044 0c3.837 0 6.925 2.085 6.956 4.807 0 .776-.24 1.497-.65 2.093.42.31.75.74.93 1.23.27.77-.03 1.5-.557 1.95.31.42.5.93.5 1.48 0 .98-.627 1.813-1.514 2.14.2.98.3 1.99.3 3.01 0 4.079-2.157 7.456-5.363 9.325l3.295-9.027c.097-.268.153-.543.153-.832 0-1.208-.623-2.277-1.515-2.971z"/>

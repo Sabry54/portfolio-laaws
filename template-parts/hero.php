@@ -5,17 +5,17 @@
       <div class="md:w-1/2 text-center md:text-left">
         <!-- H1 avec prénom en couleur d'accent -->
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-secondary leading-tight">
-          Salut, je suis <span class="text-accent">Sabry</span> Ferrand
+          Bienvenue sur le thème <span class="text-accent">Wordpress</span> de Sabry Ferrand
         </h1>
         
         <!-- Sous-titre / Description -->
         <p class="text-lg md:text-xl text-theme mb-8 leading-relaxed max-w-2xl mx-auto md:mx-0">
-          Développeur WordPress passionné par le code propre et performant.
+        Ce thème WordPress sur mesure allie PHP, HTML, CSS, JavaScript et MySQL pour performance, sécurité et évolutivité professionnelle.
         </p>
         
         <!-- Phrase concise et percutante -->
         <p class="text-base md:text-lg text-theme-light mb-8 max-w-2xl mx-auto md:mx-0">
-          Je transforme vos idées en solutions web performantes et élégantes.
+        Pensé pour répondre aux standards modernes, ce thème facilite l’intégration d’outils métiers, l’automatisation et la gestion sécurisée des données.
         </p>
         
         <!-- Bouton CTA -->
@@ -49,5 +49,12 @@
         </div>
       </div>
     </div>
+  </div>
+  
+  <!-- Séparateur SVG moderne entre Hero et Skills -->
+  <div class="absolute bottom-0 left-0 w-full overflow-hidden" style="line-height: 0;">
+    <svg class="relative block w-full h-16 md:h-20" viewBox="0 0 1440 120" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,64L48,69.3C96,75,192,85,288,85.3C384,85,480,75,576,64C672,53,768,43,864,58.7C960,75,1056,117,1152,122.7C1248,128,1344,96,1392,80L1440,64V0H0Z" fill="var(--color-background)"></path>
+    </svg>
   </div>
 </section>
