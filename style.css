@@ -1,0 +1,186 @@
+/*
+Theme Name: Portfolio Theme
+Theme URI: http://localhost/portfolio-laaws
+Author: [Sabry Ferrand]
+Author URI: http://localhost
+Description: Thème WordPress personnalisé pour le portfolio.
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: portfolio-theme
+*/
+
+/* Variables de couleurs - Palette inspirée du site laaws.lu */
+:root {
+  --color-primary: #1e3a8a; /* Bleu foncé professionnel principal */
+  --color-primary-hover: #1e40af; /* Bleu foncé hover */
+  --color-primary-light: #3b82f6; /* Bleu clair pour accents et liens */
+  --color-primary-dark: #1e293b; /* Bleu très foncé pour titres */
+  --color-secondary: #0f172a; /* Gris foncé pour textes principaux */
+  --color-text: #334155; /* Gris moyen pour textes */
+  --color-text-light: #64748b; /* Gris clair pour textes secondaires */
+  --color-background: #ffffff; /* Blanc pur */
+  --color-background-light: #f1f5f9; /* Gris très clair pour sections alternées */
+  --color-background-section: #f8fafc; /* Gris très clair pour sections */
+  --color-border: #e2e8f0; /* Gris clair pour bordures */
+  --color-border-light: #f1f5f9; /* Gris très clair pour bordures subtiles */
+  --color-accent: #ff8c61; /* Orange/corail pour sublimer - boutons et sous-titres */
+  --color-accent-hover: #e67a4f; /* Orange/corail foncé pour hover */
+  --color-accent-light: #ffa585; /* Orange/corail clair pour accents légers */
+}
+
+/* Animation de soulignement au hover pour le menu */
+.menu-link-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.menu-link-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-accent);
+  transition: width 0.3s ease-in-out;
+}
+
+.menu-link-underline:hover::after {
+  width: 100%;
+}
+
+/* Pour le menu mobile */
+.menu-link-underline-mobile {
+  position: relative;
+  display: inline-block;
+}
+
+.menu-link-underline-mobile::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-accent);
+  transition: width 0.3s ease-in-out;
+}
+
+.menu-link-underline-mobile:hover::after {
+  width: 100%;
+}
+
+/* Classes personnalisées pour les couleurs du thème */
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-primary-hover:hover {
+  color: var(--color-primary-hover);
+}
+
+.text-primary-light {
+  color: var(--color-primary-light);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-primary-hover:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.bg-primary-light {
+  background-color: var(--color-primary-light);
+}
+
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+.text-theme {
+  color: var(--color-text);
+}
+
+.text-theme-light {
+  color: var(--color-text-light);
+}
+
+.bg-theme {
+  background-color: var(--color-background);
+}
+
+.bg-theme-light {
+  background-color: var(--color-background-light);
+}
+
+.bg-theme-section {
+  background-color: var(--color-background-section);
+}
+
+.border-theme {
+  border-color: var(--color-border);
+}
+
+.border-theme-light {
+  border-color: var(--color-border-light);
+}
+
+.text-primary-dark {
+  color: var(--color-primary-dark);
+}
+
+/* Classes pour la couleur d'accent (orange/corail) */
+.text-accent {
+  color: var(--color-accent);
+}
+
+.text-accent-hover:hover {
+  color: var(--color-accent-hover);
+}
+
+.text-accent-light {
+  color: var(--color-accent-light);
+}
+
+.bg-accent {
+  background-color: var(--color-accent);
+}
+
+.bg-accent-hover:hover {
+  background-color: var(--color-accent-hover);
+}
+
+.bg-accent-light {
+  background-color: var(--color-accent-light);
+}
+
+/* Effet 3D pour l'image Hero */
+.hero-image-container {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.hero-image-3d {
+  transform-style: preserve-3d;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Styles pour les cards de compétences - Fallback pour la visibilité */
+.skill-card {
+  opacity: 1;
+  transform: translateY(0);
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Styles pour les cards de projets - Fallback pour la visibilité */
+.project-card {
+  opacity: 1;
+  transform: translateY(0);
+}
