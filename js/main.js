@@ -2,6 +2,19 @@ document.addEventListener("DOMContentLoaded", () => {
   // Enregistrer ScrollTrigger
   gsap.registerPlugin(ScrollTrigger);
 
+  // Gérer le scroll vers les ancres après redirection depuis une autre page
+  const hash = window.location.hash;
+  if (hash) {
+    // Attendre un peu que la page soit complètement chargée
+    setTimeout(() => {
+      const target = document.querySelector(hash);
+      if (target) {
+        // Scroll smooth vers l'élément
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
+  }
+
   // Animation Hero au chargement
   gsap.from("#hero h1", { duration: 1, y: -50, opacity: 0 });
   gsap.from("#hero p", { duration: 1, y: 50, opacity: 0, delay: 0.5 });
@@ -64,6 +77,22 @@ document.addEventListener("DOMContentLoaded", () => {
     opacity: 0,
     ease: "power2.out",
   });
+
+  // Animation du bouton CTA Galerie
+  const galleryCTA = document.querySelector(".gallery-cta-content");
+  if (galleryCTA) {
+    gsap.from(galleryCTA, {
+      scrollTrigger: {
+        trigger: galleryCTA,
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+      duration: 0.8,
+      y: 30,
+      opacity: 0,
+      ease: "power2.out",
+    });
+  }
 
   // Effet 3D de carte qui suit la souris pour l'image Hero
   const heroImage = document.getElementById("hero-image-3d");
@@ -169,6 +198,71 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.key === "Escape" && !imageModal.classList.contains("hidden")) {
         closeModal();
       }
+    });
+  }
+
+  // Gestion du modal de la galerie
+  const galleryItems = document.querySelectorAll(".gallery-item img");
+  const galleryModal = document.getElementById("gallery-modal");
+  const galleryModalImg = document.getElementById("gallery-modal-image");
+  const galleryModalTitle = document.getElementById("gallery-modal-title");
+  const galleryModalClosers = document.querySelectorAll("[data-gallery-close]");
+
+  if (
+    galleryItems.length > 0 &&
+    galleryModal &&
+    galleryModalImg &&
+    galleryModalTitle
+  ) {
+    const openGalleryModal = (imageUrl, title) => {
+      galleryModalImg.src = imageUrl;
+      galleryModalImg.alt = title || "Image de la galerie";
+      galleryModalTitle.textContent = title || "";
+      galleryModal.classList.remove("hidden");
+      document.body.classList.add("overflow-hidden");
+    };
+
+    const closeGalleryModal = () => {
+      galleryModal.classList.add("hidden");
+      document.body.classList.remove("overflow-hidden");
+      galleryModalImg.src = "";
+    };
+
+    galleryItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        const imageUrl = item.getAttribute("data-gallery-image");
+        const title = item.getAttribute("data-gallery-title");
+        if (imageUrl) {
+          openGalleryModal(imageUrl, title);
+        }
+      });
+    });
+
+    galleryModalClosers.forEach((closer) => {
+      closer.addEventListener("click", closeGalleryModal);
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !galleryModal.classList.contains("hidden")) {
+        closeGalleryModal();
+      }
+    });
+  }
+
+  // Animation des items de la galerie au scroll
+  const galleryItemsAnimated = document.querySelectorAll(".gallery-item");
+  if (galleryItemsAnimated.length > 0) {
+    gsap.from(galleryItemsAnimated, {
+      scrollTrigger: {
+        trigger: "#gallery",
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+      duration: 0.6,
+      y: 40,
+      opacity: 0,
+      stagger: 0.1,
+      ease: "power2.out",
     });
   }
 });

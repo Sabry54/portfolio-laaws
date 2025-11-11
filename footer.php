@@ -1,5 +1,5 @@
 <footer>
-    <p>&copy; <?php echo date('Y'); ?> Portfolio Theme. Tous droits réservés.</p>
+    <p>&copy; <?php echo date('Y'); ?> Ferrand Sabry. Tous droits réservés.</p>
 </footer>
 <script src="https://cdn.tailwindcss.com"></script>
 

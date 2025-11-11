@@ -261,3 +261,275 @@ Text Domain: portfolio-theme
 body.overflow-hidden {
   overflow: hidden;
 }
+
+/* Styles pour le bouton CTA Galerie */
+.gallery-cta-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-cta-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.gallery-cta-button:hover::before {
+  left: 100%;
+}
+
+/* Styles pour la galerie */
+.gallery-item {
+  position: relative;
+}
+
+.gallery-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.gallery-modal.hidden {
+  display: none;
+}
+
+.gallery-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(4px);
+}
+
+.gallery-modal__content {
+  position: relative;
+  max-width: min(90vw, 1200px);
+  max-height: 90vh;
+  background: var(--color-background);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 20px 60px -15px rgba(15, 23, 42, 0.5);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gallery-modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  background: transparent;
+  border: none;
+  color: var(--color-secondary);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  z-index: 2;
+}
+
+.gallery-modal__close:hover,
+.gallery-modal__close:focus {
+  color: var(--color-accent);
+}
+
+.gallery-modal__image {
+  width: 100%;
+  height: auto;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 0.75rem;
+}
+
+.gallery-modal__title {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* Contact form styles */
+.contact-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(6px);
+}
+
+.contact-card__glow {
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(
+    circle at top right,
+    rgba(255, 140, 97, 0.2),
+    transparent 60%
+  );
+  opacity: 0.7;
+}
+
+.contact-card form {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.contact-card p {
+  margin: 0;
+}
+
+.contact-card label {
+  font-weight: 600;
+  color: var(--color-secondary);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.contact-card input[type=\"text\"],
+.contact-card input[type=\"email\"],
+.contact-card textarea {
+  width: 100%;
+  padding: 0.85rem 1.1rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-background);
+  color: var(--color-text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.contact-card input[type=\"text\"]:focus,
+.contact-card input[type=\"email\"]:focus,
+.contact-card textarea:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 10px 25px -15px rgba(255, 140, 97, 0.4);
+  outline: none;
+}
+
+.contact-card textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.contact-card input[type=\"submit\"] {
+  background: var(--color-accent);
+  color: #ffffff;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.9rem 1.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+}
+
+.contact-card input[type=\"submit\"]:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px -20px rgba(255, 140, 97, 0.45);
+}
+
+.contact-card .wpcf7-response-output {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.contact-card .wpcf7-not-valid-tip {
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  margin-top: 0.4rem;
+}
+
+/* Styles pour la galerie de projets */
+#gallery-filters {
+  margin-bottom: 3rem;
+}
+
+.filter-btn {
+  cursor: pointer;
+  border: 2px solid;
+  transition: all 0.3s ease;
+}
+
+.filter-btn.active {
+  background-color: var(--color-accent) !important;
+  color: white !important;
+  border-color: var(--color-accent) !important;
+}
+
+.filter-btn:not(.active) {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.filter-btn:not(.active):hover {
+  background-color: var(--color-background-light);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Styles pour les cartes de projets */
+.project-card {
+  will-change: opacity, transform;
+}
+
+.project-card.hidden {
+  display: none;
+}
+
+/* Animation fade pour les cartes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.project-card.fade-in {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* Responsive pour les cartes de projets */
+@media (max-width: 640px) {
+  #gallery-filters {
+    gap: 0.5rem;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  #gallery-grid {
+    gap: 1rem;
+  }
+}
+
+/* Amélioration de l'accessibilité pour les filtres */
+.filter-btn:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Style pour le message "Aucun résultat" */
+#no-results-message {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem 1rem;
+}

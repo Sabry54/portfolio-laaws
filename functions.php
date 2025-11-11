@@ -17,6 +17,19 @@ function portfolio_theme_enqueue() {
 add_action( 'wp_enqueue_scripts', 'portfolio_theme_enqueue' );
 
 /**
+ * Support des fonctionnalités du thème
+ */
+function portfolio_theme_setup() {
+    // Support des images mises en avant
+    add_theme_support( 'post-thumbnails' );
+    set_post_thumbnail_size( 800, 600, true );
+    
+    // Support des titres automatiques
+    add_theme_support( 'title-tag' );
+}
+add_action( 'after_setup_theme', 'portfolio_theme_setup' );
+
+/**
  * Enregistrement des menus
  */
 function portfolio_theme_menus() {
@@ -27,17 +40,58 @@ function portfolio_theme_menus() {
 add_action( 'after_setup_theme', 'portfolio_theme_menus' );
 
 /**
+ * Fonction helper pour gérer les URLs d'ancres (redirige vers la page d'accueil si nécessaire)
+ */
+function portfolio_fix_anchor_url( $url ) {
+    if ( empty( $url ) ) {
+        return $url;
+    }
+    
+    // Si c'est une ancre simple (commence par #)
+    if ( strpos( $url, '#' ) === 0 ) {
+        // Vérifier si on est sur la page d'accueil
+        $is_home = is_front_page() || is_home();
+        
+        if ( ! $is_home ) {
+            // Si on n'est pas sur la page d'accueil, rediriger vers la page d'accueil avec l'ancre
+            return home_url( '/' ) . $url;
+        }
+    }
+    // Si l'URL contient une ancre mais pointe vers la page d'accueil
+    elseif ( strpos( $url, '#' ) !== false && strpos( $url, home_url() ) === 0 ) {
+        // Extraire l'ancre
+        $anchor = substr( $url, strpos( $url, '#' ) );
+        $is_home = is_front_page() || is_home();
+        
+        if ( ! $is_home ) {
+            // Rediriger vers la page d'accueil avec l'ancre
+            return home_url( '/' ) . $anchor;
+        }
+    }
+    
+    return $url;
+}
+
+/**
  * Menu par défaut si aucun menu n'est configuré (Desktop)
  */
 function portfolio_default_menu() {
     // URL GitHub - à modifier selon votre profil
-    $github_url = 'https://github.com/votre-profil'; // Remplacez par votre URL GitHub
+    $github_url = 'https://github.com/sabry54';
+    
+    // URLs des ancres avec redirection vers la page d'accueil si nécessaire
+    $hero_url = portfolio_fix_anchor_url( '#hero' );
+    $skills_url = portfolio_fix_anchor_url( '#skills' );
+    $projects_url = portfolio_fix_anchor_url( '#projects' );
+    $contact_url = portfolio_fix_anchor_url( '#contact' );
+    $gallery_url = portfolio_get_gallery_url();
     
     echo '<ul class="flex items-center space-x-1 xl:space-x-2">';
-    echo '<li><a href="#hero" class="menu-link-underline px-3 py-2 text-theme hover:text-primary transition font-medium">Accueil</a></li>';
-    echo '<li><a href="#skills" class="menu-link-underline px-3 py-2 text-theme hover:text-primary transition font-medium">Compétences</a></li>';
-    echo '<li><a href="#projects" class="menu-link-underline px-3 py-2 text-theme hover:text-primary transition font-medium">Projets</a></li>';
-    echo '<li><a href="#contact" class="menu-link-underline px-3 py-2 text-theme hover:text-primary transition font-medium">Contact</a></li>';
+    echo '<li><a href="' . esc_url( $hero_url ) . '" class="menu-link-underline px-3 py-2 text-theme hover:text-primary transition font-medium">Accueil</a></li>';
+    echo '<li><a href="' . esc_url( $skills_url ) . '" class="menu-link-underline px-3 py-2 text-theme hover:text-primary transition font-medium">Compétences</a></li>';
+    echo '<li><a href="' . esc_url( $projects_url ) . '" class="menu-link-underline px-3 py-2 text-theme hover:text-primary transition font-medium">Projets</a></li>';
+    echo '<li><a href="' . esc_url( $gallery_url ) . '" class="menu-link-underline px-3 py-2 text-theme hover:text-primary transition font-medium">Galerie</a></li>';
+    echo '<li><a href="' . esc_url( $contact_url ) . '" class="menu-link-underline px-3 py-2 text-theme hover:text-primary transition font-medium">Contact</a></li>';
     echo '<li><a href="' . esc_url( $github_url ) . '" target="_blank" rel="noopener noreferrer" class="menu-link-underline px-3 py-2 text-theme hover:text-primary transition font-medium">GitHub</a></li>';
     echo '</ul>';
 }
@@ -47,13 +101,21 @@ function portfolio_default_menu() {
  */
 function portfolio_default_menu_mobile() {
     // URL GitHub - à modifier selon votre profil
-    $github_url = 'https://github.com/votre-profil'; // Remplacez par votre URL GitHub
+    $github_url = 'https://github.com/sabry54';
+    
+    // URLs des ancres avec redirection vers la page d'accueil si nécessaire
+    $hero_url = portfolio_fix_anchor_url( '#hero' );
+    $skills_url = portfolio_fix_anchor_url( '#skills' );
+    $projects_url = portfolio_fix_anchor_url( '#projects' );
+    $contact_url = portfolio_fix_anchor_url( '#contact' );
+    $gallery_url = portfolio_get_gallery_url();
     
     echo '<ul class="flex flex-col space-y-1">';
-    echo '<li><a href="#hero" class="menu-link-underline-mobile block px-4 py-3 text-theme hover:bg-theme-light hover:text-primary rounded-md transition font-medium">Accueil</a></li>';
-    echo '<li><a href="#skills" class="menu-link-underline-mobile block px-4 py-3 text-theme hover:bg-theme-light hover:text-primary rounded-md transition font-medium">Compétences</a></li>';
-    echo '<li><a href="#projects" class="menu-link-underline-mobile block px-4 py-3 text-theme hover:bg-theme-light hover:text-primary rounded-md transition font-medium">Projets</a></li>';
-    echo '<li><a href="#contact" class="menu-link-underline-mobile block px-4 py-3 text-theme hover:bg-theme-light hover:text-primary rounded-md transition font-medium">Contact</a></li>';
+    echo '<li><a href="' . esc_url( $hero_url ) . '" class="menu-link-underline-mobile block px-4 py-3 text-theme hover:bg-theme-light hover:text-primary rounded-md transition font-medium">Accueil</a></li>';
+    echo '<li><a href="' . esc_url( $skills_url ) . '" class="menu-link-underline-mobile block px-4 py-3 text-theme hover:bg-theme-light hover:text-primary rounded-md transition font-medium">Compétences</a></li>';
+    echo '<li><a href="' . esc_url( $projects_url ) . '" class="menu-link-underline-mobile block px-4 py-3 text-theme hover:bg-theme-light hover:text-primary rounded-md transition font-medium">Projets</a></li>';
+    echo '<li><a href="' . esc_url( $gallery_url ) . '" class="menu-link-underline-mobile block px-4 py-3 text-theme hover:bg-theme-light hover:text-primary rounded-md transition font-medium">Galerie</a></li>';
+    echo '<li><a href="' . esc_url( $contact_url ) . '" class="menu-link-underline-mobile block px-4 py-3 text-theme hover:bg-theme-light hover:text-primary rounded-md transition font-medium">Contact</a></li>';
     echo '<li><a href="' . esc_url( $github_url ) . '" target="_blank" rel="noopener noreferrer" class="menu-link-underline-mobile block px-4 py-3 text-theme hover:bg-theme-light hover:text-primary rounded-md transition font-medium">GitHub</a></li>';
     echo '</ul>';
 }
@@ -88,7 +150,11 @@ class Portfolio_Menu_Walker extends Walker_Nav_Menu {
         }
         
         $attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
-        $attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
+        
+        // Gérer les URLs d'ancres (rediriger vers la page d'accueil si nécessaire)
+        $item_url = ! empty( $item->url ) ? $item->url : '';
+        $item_url = portfolio_fix_anchor_url( $item_url );
+        $attributes .= ' href="' . esc_attr( $item_url ) . '"';
 
         $item_output = isset( $args->before ) ? $args->before : '';
         $item_output .= '<a' . $attributes . ' class="menu-link-underline px-3 py-2 text-theme hover:text-primary transition font-medium">';
@@ -130,7 +196,11 @@ class Portfolio_Mobile_Menu_Walker extends Walker_Nav_Menu {
         }
         
         $attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
-        $attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
+        
+        // Gérer les URLs d'ancres (rediriger vers la page d'accueil si nécessaire)
+        $item_url = ! empty( $item->url ) ? $item->url : '';
+        $item_url = portfolio_fix_anchor_url( $item_url );
+        $attributes .= ' href="' . esc_attr( $item_url ) . '"';
 
         $item_output = isset( $args->before ) ? $args->before : '';
         $item_output .= '<a' . $attributes . ' class="menu-link-underline-mobile block px-4 py-3 text-theme hover:bg-theme-light hover:text-primary rounded-md transition font-medium">';
@@ -179,3 +249,84 @@ function portfolio_get_image_url_by_filename( $filename ) {
     
     return '';
 }
+
+/**
+ * Crée automatiquement la page Galerie lors de l'activation du thème
+ */
+function portfolio_create_gallery_page() {
+    // Vérifier si la page existe déjà
+    $page_slug = 'galerie';
+    $page = get_page_by_path( $page_slug );
+    
+    if ( ! $page ) {
+        // Créer la page
+        $page_data = array(
+            'post_title'    => 'Galerie',
+            'post_name'     => $page_slug,
+            'post_content'  => '',
+            'post_status'   => 'publish',
+            'post_type'     => 'page',
+            'post_author'   => 1,
+        );
+        
+        $page_id = wp_insert_post( $page_data );
+        
+        // Assigner le template "Galerie de Projets" à la page
+        if ( $page_id && ! is_wp_error( $page_id ) ) {
+            // Utiliser le template page-galerie.php (WordPress le détecte automatiquement par le slug)
+            // Mais on peut aussi forcer avec le nom du template
+            $template_file = locate_template( 'page-galerie.php' );
+            if ( $template_file ) {
+                update_post_meta( $page_id, '_wp_page_template', 'page-galerie.php' );
+            }
+        }
+    } else {
+        // Si la page existe déjà, s'assurer qu'elle utilise le bon template
+        $template_file = locate_template( 'page-galerie.php' );
+        if ( $template_file ) {
+            update_post_meta( $page->ID, '_wp_page_template', 'page-galerie.php' );
+        }
+    }
+}
+add_action( 'after_switch_theme', 'portfolio_create_gallery_page' );
+
+/**
+ * Crée la page Galerie immédiatement si elle n'existe pas (pour les thèmes déjà actifs)
+ */
+function portfolio_check_gallery_page() {
+    $page_slug = 'galerie';
+    $page = get_page_by_path( $page_slug );
+    
+    if ( ! $page ) {
+        portfolio_create_gallery_page();
+    }
+}
+add_action( 'init', 'portfolio_check_gallery_page' );
+
+/**
+ * Retourne l'URL de la page Galerie, en la créant si nécessaire
+ */
+function portfolio_get_gallery_url() {
+    $page_slug = 'galerie';
+    $page = get_page_by_path( $page_slug );
+    
+    if ( ! $page ) {
+        portfolio_create_gallery_page();
+        // Recharger la page après création
+        $page = get_page_by_path( $page_slug );
+    }
+    
+    if ( $page ) {
+        return get_permalink( $page->ID );
+    }
+    
+    // Fallback
+    return home_url( '/galerie' );
+}
+
+/**
+ * NOTE: Le code des projets a été déplacé dans le plugin "Portfolio Projets"
+ * Le plugin se trouve dans: /wp-content/plugins/portfolio-projets/
+ * 
+ * Le thème garde uniquement le template d'affichage (page-galerie.php)
+ */

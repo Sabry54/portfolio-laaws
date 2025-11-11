@@ -33,7 +33,7 @@
           'title' => 'Site web personnel',
           'description' => 'Site web developpé avec Cursor uniquement, de base un challenge transformé en CV en ligne',
           'image' => $project_3_image ? $project_3_image : 'https://via.placeholder.com/600x400',
-          'tags' => ['Cursor' , 'Github' , 'Me', 'Myself', 'and I'],
+          'tags' => ['Cursor'  , 'Me', 'Myself', 'and I'],
           'link' => 'https://www.ferrandsabry.fr/',
           'link_text' => 'Vers le site'
         ],
