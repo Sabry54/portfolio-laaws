@@ -1,0 +1,9 @@
+/* Importation des couches Tailwind nécessaires à la base du design */
+@tailwind base;
+
+/* Importation des composants Tailwind utilisés dans l’interface */
+@tailwind components;
+
+/* Importation des utilitaires Tailwind pour toutes les classes utilitaires */
+@tailwind utilities;
+

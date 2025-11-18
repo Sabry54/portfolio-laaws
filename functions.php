@@ -8,11 +8,42 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Enqueue styles et scripts du thème
  */
 function portfolio_theme_enqueue() {
-    // CSS principal
-    wp_enqueue_style( 'portfolio-style', get_stylesheet_uri() );
+    // Charger le CSS Tailwind compilé localement s'il est disponible
+    $tailwind_path = get_template_directory() . '/assets/css/tailwind.css';
+    $style_dependencies = array();
 
-    // JS 
-    wp_enqueue_script( 'portfolio-script', get_template_directory_uri() . '/js/main.js', array('jquery'), '1.0', true );
+    if ( file_exists( $tailwind_path ) ) {
+        wp_enqueue_style(
+            'portfolio-tailwind',
+            get_template_directory_uri() . '/assets/css/tailwind.css',
+            array(),
+            filemtime( $tailwind_path )
+        );
+        $style_dependencies[] = 'portfolio-tailwind';
+    }
+
+    // CSS principal du thème (style.css) pour les règles personnalisées
+    $style_path = get_stylesheet_directory() . '/style.css';
+    $style_version = file_exists( $style_path ) ? filemtime( $style_path ) : null;
+
+    wp_enqueue_style(
+        'portfolio-style',
+        get_stylesheet_uri(),
+        $style_dependencies,
+        $style_version
+    );
+
+    // JS principal avec version basée sur la date de modification pour le cache busting
+    $script_path = get_template_directory() . '/js/main.js';
+    $script_version = file_exists( $script_path ) ? filemtime( $script_path ) : null;
+
+    wp_enqueue_script(
+        'portfolio-script',
+        get_template_directory_uri() . '/js/main.js',
+        array( 'jquery' ),
+        $script_version,
+        true
+    );
 }
 add_action( 'wp_enqueue_scripts', 'portfolio_theme_enqueue' );
 
